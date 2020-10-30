@@ -155,7 +155,7 @@ class LineSearch():
                 p = -self.gradient(x)
             elif descent_method==2: #newton descent_method
                 p = -np.matmul(np.linalg.inv(self.hessian(x)), self.gradient(x))
-            elif descent_method==3: #quasi BFGS
+            elif descent_method==3: #quasi BFGS   #TODO how to initial B_inv_pre
                 p, B_inv = self.BFGS_inv(x, x_pre, y, y_pre, B_inv_pre): 
 
             if ls_method == 1:
@@ -184,7 +184,7 @@ class LineSearch():
 if __name__ == '__main__':
     ls = LineSearch() 
     x = np.array([-1.2, 1])
-    # descent_method: 1: Steepest Descent; 2: Newton 
+    # descent_method: 1: Steepest Descent; 2: Newton; 3: quasi-BFGS
     # ls_method: 1: backtracking; 2: strong Wolfe
     y = ls.main(x, descent_method=2, ls_method = 1, max_iter=5000)
 
